@@ -42,22 +42,99 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
-
 @Composable
 fun GentleApp() {
+    var showWelcome by remember { mutableStateOf(true) }
+
+    if (showWelcome) {
+        WelcomeScreen(
+            onStartClick = { showWelcome = false }
+        )
+    } else {
+        SupportScreen()
+    }
+}
+
+
+@Composable
+fun WelcomeScreen(onStartClick: () -> Unit) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color(0xFFF9F4F6))
+            .padding(24.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        Text(
+            text = "Лапка поддержки 🐾",
+            fontSize = 30.sp,
+            textAlign = TextAlign.Center
+        )
+
+        Spacer(modifier = Modifier.height(20.dp))
+
+        Text(
+            text = "Маленькое место, где тебя ждут тепло, зверушки и добрые слова.",
+            fontSize = 18.sp,
+            textAlign = TextAlign.Center,
+            color = Color(0xFF6B5B63),
+            lineHeight = 26.sp
+        )
+
+        Spacer(modifier = Modifier.height(32.dp))
+
+        Button(
+            onClick = onStartClick,
+            modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(20.dp),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = Color(0xFFE6A8C2)
+            )
+        ) {
+            Text(
+                text = "Нажми, если нужна лапка поддержки",
+                fontSize = 18.sp,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.padding(vertical = 8.dp)
+            )
+        }
+    }
+}
+
+@Composable
+fun SupportScreen() {
     val animals = listOf(
         R.drawable.puppy_1,
         R.drawable.kitten_1,
-        R.drawable.sloth_1
+        R.drawable.sloth_1,
+        R.drawable.kitten_2,
+        R.drawable.puppy_2,
+        R.drawable.kitten_3,
+        R.drawable.sloth_2,
+        R.drawable.kitten_4,
+        R.drawable.snake_1,
+        R.drawable.snake_2,
+        R.drawable.fox_1
     )
 
     val quotes = listOf(
         "Ты не обязан быть сильным сегодня.",
         "Ты заслуживаешь отдыха.",
-        "Можно просто выдохнуть.",
         "Сегодня достаточно просто быть.",
-        "Даже маленький шаг — уже шаг.",
-        "С тобой уже всё не так уж плохо."
+        "Даже маленький шаг - уже шаг.",
+        "Даже если сейчас тяжело, ты всё равно важен.",
+        "Ты достоин любви и тепла.",
+        "Ты не обязан быстро прийти в норму.",
+        "Твои чувства имеют значение.",
+        "Тебе не нужно быть неуязвимым.",
+        "Ты заслуживаешь бережного отношения.",
+        "Тебе можно грустить столько, сколько нужно.",
+        "Ты не заслужил боли, которую тебе причинили.",
+        "Ты не обязан всегда со всем справляться.",
+        "Ты - моя стая.",
+        "Тебя правда достаточно.",
+        "Тебя любят."
     )
 
     var currentAnimal by remember { mutableIntStateOf(animals.random()) }
@@ -86,11 +163,6 @@ fun GentleApp() {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        Text(
-            text = "Лапка поддержки 🐾",
-            fontSize = 28.sp,
-            textAlign = TextAlign.Center
-        )
 
         Spacer(modifier = Modifier.height(24.dp))
 
@@ -102,7 +174,7 @@ fun GentleApp() {
                 modifier = Modifier
                     .fillMaxWidth()
                     .background(Color.White)
-                    .padding(12.dp),
+                    .padding(24.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Image(
@@ -110,7 +182,7 @@ fun GentleApp() {
                     contentDescription = "animal",
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(260.dp)
+                        .height(600.dp)
                         .clip(RoundedCornerShape(16.dp)),
                     contentScale = ContentScale.Crop
                 )
@@ -137,7 +209,7 @@ fun GentleApp() {
         ) {
             Text(
                 text = "Ещё",
-                fontSize = 20.sp
+                fontSize = 18.sp
             )
         }
     }
