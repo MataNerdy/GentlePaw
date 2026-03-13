@@ -1,6 +1,7 @@
 package com.example.gentlepaws
 
 import android.os.Bundle
+import androidx.compose.foundation.layout.Box
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
@@ -93,7 +94,7 @@ fun WelcomeScreen(onStartClick: () -> Unit) {
             )
         ) {
             Text(
-                text = "Нажми, если нужна лапка поддержки",
+                text = "Нажми сюда",
                 fontSize = 18.sp,
                 textAlign = TextAlign.Center,
                 modifier = Modifier.padding(vertical = 8.dp)
@@ -122,17 +123,15 @@ fun SupportScreen() {
         "Ты не обязан быть сильным сегодня.",
         "Ты заслуживаешь отдыха.",
         "Сегодня достаточно просто быть.",
-        "Даже маленький шаг - уже шаг.",
+        "Даже маленький шаг — уже шаг.",
         "Даже если сейчас тяжело, ты всё равно важен.",
         "Ты достоин любви и тепла.",
-        "Ты не обязан быстро прийти в норму.",
+        "Тебе можно быть неидеальным.",
         "Твои чувства имеют значение.",
         "Тебе не нужно быть неуязвимым.",
         "Ты заслуживаешь бережного отношения.",
-        "Тебе можно грустить столько, сколько нужно.",
-        "Ты не заслужил боли, которую тебе причинили.",
         "Ты не обязан всегда со всем справляться.",
-        "Ты - моя стая.",
+        "Ты — моя стая.",
         "Тебя правда достаточно.",
         "Тебя любят."
     )
@@ -155,62 +154,64 @@ fun SupportScreen() {
         currentQuote = newQuote
     }
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color(0xFFF9F4F6))
-            .padding(24.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+    Box(
+        modifier = Modifier.fillMaxSize()
     ) {
+        Image(
+            painter = painterResource(id = currentAnimal),
+            contentDescription = "animal",
+            modifier = Modifier.fillMaxSize(),
+            contentScale = ContentScale.Crop
+        )
 
-        Spacer(modifier = Modifier.height(24.dp))
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(Color(0x11000000))
+        )
 
-        Card(
-            shape = RoundedCornerShape(24.dp),
-            modifier = Modifier.fillMaxWidth()
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(60.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Bottom
         ) {
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .background(Color.White)
-                    .padding(24.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
+            Card(
+                shape = RoundedCornerShape(24.dp),
+                modifier = Modifier.fillMaxWidth()
             ) {
-                Image(
-                    painter = painterResource(id = currentAnimal),
-                    contentDescription = "animal",
+                Column(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(600.dp)
-                        .clip(RoundedCornerShape(16.dp)),
-                    contentScale = ContentScale.Crop
-                )
+                        .background(Color.White.copy(alpha = 0.2f))
+                        .padding(24.dp),
+                ) {
+                    Text(
+                        text = currentQuote,
+                        modifier = Modifier.fillMaxWidth(),
+                        fontSize = 22.sp,
+                        textAlign = TextAlign.Center,
+                        lineHeight = 30.sp
+                    )
+                }
+            }
 
-                Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(20.dp))
 
+            Button(
+                onClick = { nextCard() },
+                modifier = Modifier.fillMaxWidth(),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color(0xFFE6A8C2)
+                ),
+                shape = RoundedCornerShape(20.dp)
+            ) {
                 Text(
-                    text = currentQuote,
-                    fontSize = 22.sp,
-                    textAlign = TextAlign.Center,
-                    lineHeight = 30.sp
+                    text = "Ещё",
+                    fontSize = 18.sp
                 )
             }
-        }
-
-        Spacer(modifier = Modifier.height(24.dp))
-
-        Button(
-            onClick = { nextCard() },
-            modifier = Modifier.fillMaxWidth(),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = Color(0xFFE6A8C2)
-            )
-        ) {
-            Text(
-                text = "Ещё",
-                fontSize = 18.sp
-            )
         }
     }
 }
