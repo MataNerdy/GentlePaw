@@ -121,6 +121,7 @@ fun SupportScreen() {
         R.drawable.lynx_1,
         R.drawable.lynx_2,
         R.drawable.linx_3,
+        R.drawable.robot_1,
         R.drawable.robot_2,
         R.drawable.sloth_3,
         R.drawable.snowcat_1,
